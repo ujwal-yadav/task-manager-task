@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-export const TaskForm = ({ editingTask, addTask, updateTask }) => {
+export const TaskForm = ({ selectedTask, addTask, updateTask }) => {
   const [formData, setFormData] = useState({
-    title: editingTask ? editingTask.title : '',
-    description: editingTask ? editingTask.description : '',
-    priority: editingTask ? editingTask.priority : 'default',
+    title: selectedTask ? selectedTask.title : '',
+    description: selectedTask ? selectedTask.description : '',
+    priority: selectedTask ? selectedTask.priority : 'default',
   });
 
   const [errors, setErrors] = useState({});
@@ -33,8 +33,8 @@ export const TaskForm = ({ editingTask, addTask, updateTask }) => {
 
     setErrors({});
 
-    if (editingTask) {
-      updateTask(editingTask.id, formData);
+    if (selectedTask) {
+      updateTask(selectedTask.id, formData);
     } else {
       addTask(formData);
     }
@@ -101,7 +101,7 @@ export const TaskForm = ({ editingTask, addTask, updateTask }) => {
           type="submit"
           className="font-medium w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
         >
-          {editingTask ? 'Update Task' : 'Add Task'}
+          {selectedTask ? 'Update Task' : 'Add Task'}
         </button>
       </div>
     </form>
